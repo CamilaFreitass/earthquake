@@ -1,0 +1,2 @@
+# Earthquake (Terremotos) - API
+
