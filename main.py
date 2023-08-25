@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 
 app = FastAPI()
 
+DEBUG = config('DEBUG', cast=bool, default=False)
 
 def conectaBanco():
     engine = create_engine(conn, echo=True)
