@@ -6,7 +6,7 @@ import requests
 import json
 import googlemaps
 from haversine import haversine
-from decouple import config
+from decouple import config, Csv
 from unidecode import unidecode
 from datetime import datetime, timedelta
 
@@ -14,13 +14,16 @@ app = FastAPI()
 
 DEBUG = config('DEBUG', cast=bool, default=False)
 
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
+
+key = config('key')
+
+
 def conectaBanco():
     engine = create_engine(conn, echo=True)
     Session = sessionmaker(bind=engine)
     return Session()
 
-
-key = config('key')
 
 def is_valid_data(data_str):
     try:
