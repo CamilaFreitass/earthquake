@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -116,3 +117,6 @@ def consulta(cidade_base: str, data_inicio: str, data_fim: str):
                 return registro
 
 
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=81)
