@@ -1,4 +1,3 @@
-import uvicorn
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -10,12 +9,13 @@ from haversine import haversine
 from decouple import config, Csv
 from unidecode import unidecode
 from datetime import datetime, timedelta
+from fastapi.responses import RedirectResponse
 
 app = FastAPI()
 
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
+# ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -49,6 +49,10 @@ def verificar_limite_de_tempo(data_inicial, data_final):
         return True
     else:
         return False
+
+@app.get('/', include_in_schema=False)
+def index():
+    return RedirectResponse("/docs", status_code=308)
 
 
 @app.get('/consulta')
