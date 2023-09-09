@@ -1,12 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Earthquake, conn
+from models import Earthquake, CONN
 import requests
 import json
 import googlemaps
 from haversine import haversine
-from decouple import config, Csv
+from decouple import config
 from unidecode import unidecode
 from datetime import datetime, timedelta
 from fastapi.responses import RedirectResponse
@@ -15,20 +15,12 @@ app = FastAPI()
 
 DEBUG = config('DEBUG', cast=bool, default=False)
 
-# ALLOWED_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
-
-if not DEBUG:
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-
-
 key = config('key')
 
 
+
 def conectaBanco():
-    engine = create_engine(conn, echo=True)
+    engine = create_engine(CONN, echo=True)
     Session = sessionmaker(bind=engine)
     return Session()
 
