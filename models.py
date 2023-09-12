@@ -2,7 +2,7 @@ from sqlalchemy import create_engine, Column, Integer, String, Float, Text, Date
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, declarative_base
 from decouple import config
-import pymysql
+import psycopg2
 
 
 USUARIO = config('USUARIO')
@@ -11,8 +11,7 @@ HOST = config('HOST')
 BANCO = config('BANCO')
 PORT = config('PORT')
 
-CONN = f"mysql+pymysql://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
-
+CONN = f"postgresql://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
 
 engine = create_engine(CONN, echo=True)
 Session = sessionmaker(bind=engine)
