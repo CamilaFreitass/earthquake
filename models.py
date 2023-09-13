@@ -4,14 +4,9 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 from decouple import config
 import psycopg2
 
+banco = 'terremoto.db'
 
-USUARIO = config('USUARIO')
-SENHA = config('SENHA')
-HOST = config('HOST')
-BANCO = config('BANCO')
-PORT = config('PORT')
-
-CONN = f"postgresql://{USUARIO}:{SENHA}@{HOST}:{PORT}/{BANCO}"
+CONN = f"sqlite:///{banco}"
 
 engine = create_engine(CONN, echo=True)
 Session = sessionmaker(bind=engine)

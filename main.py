@@ -18,7 +18,6 @@ DEBUG = config('DEBUG', cast=bool, default=False)
 key = config('key')
 
 
-
 def conectaBanco():
     engine = create_engine(CONN, echo=True)
     Session = sessionmaker(bind=engine)
