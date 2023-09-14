@@ -6,7 +6,7 @@ import requests
 import json
 import googlemaps
 from haversine import haversine
-from decouple import config
+from decouple import config, Csv
 from unidecode import unidecode
 from datetime import datetime, timedelta
 from fastapi.responses import RedirectResponse
@@ -16,6 +16,8 @@ app = FastAPI()
 DEBUG = config('DEBUG', cast=bool, default=False)
 
 key = config('key')
+
+ALLOWDE_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
 
 def conectaBanco():
