@@ -1,5 +1,7 @@
-.env
+.ENV
 venv
 .idea
 terremoto.db
 
+/temp/
+__pycache__

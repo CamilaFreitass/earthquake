@@ -1,12 +1,13 @@
 from fastapi import FastAPI, HTTPException
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import Earthquake, CONN
+from models import Earthquake
+from env import CONN
 import requests
 import json
 import googlemaps
 from haversine import haversine
-from decouple import config, Csv
+from decouple import config
 from unidecode import unidecode
 from datetime import datetime, timedelta
 from fastapi.responses import RedirectResponse
@@ -16,8 +17,6 @@ app = FastAPI()
 DEBUG = config('DEBUG', cast=bool, default=False)
 
 key = config('key')
-
-ALLOWDE_HOSTS = config('ALLOWED_HOSTS', default=[], cast=Csv())
 
 
 def conectaBanco():
