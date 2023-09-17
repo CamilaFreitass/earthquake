@@ -4,3 +4,4 @@ venv
 terremoto.db
 
 /temp/
+__pycache__
