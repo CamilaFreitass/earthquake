@@ -30,5 +30,12 @@ Google Maps para ajudar na localização da cidade em
 relação a localização do terremoto. 
 
 
+## Passo a passo para ambiente local
 
+    git clone https://github.com/CamilaFreitass/earthquake.git
 
+    pip install requirements.txt
+
+    python make.py
+
+    * Substituir na chave google no arquivo .env

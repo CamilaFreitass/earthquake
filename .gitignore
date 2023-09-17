@@ -1,5 +1,6 @@
-.env
+.ENV
 venv
 .idea
 terremoto.db
 
+/temp/
