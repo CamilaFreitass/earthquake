@@ -15,11 +15,11 @@ def criar_pasta_temp():
         os.makedirs(directory_temp)
 
 
-def criar_arquivo_env():
+def criar_arquivo_env(CHAVE_GOOGLE_MAPS):
     import os
     from dotenv import dotenv_values
     env_vars = {
-        'key': 'sua_chave_aqui',
+        'key': CHAVE_GOOGLE_MAPS,
         'DEBUG': 'True',
         'environment': 'False'
     }
@@ -38,11 +38,18 @@ def criar_arquivo_env():
             env_file.write(f'{chave}={valor}\n')
 
 
-def bootstrap():
+def bootstrap(CHAVE_GOOGLE_MAPS):
     criar_pasta_temp()
     criar_tabelas()
-    criar_arquivo_env()
+    criar_arquivo_env(CHAVE_GOOGLE_MAPS)
 
 
 if __name__ == '__main__':
-    bootstrap()
+    import sys
+
+    if len(sys.argv) == 1:
+        print("Uso: python make.py CHAVE_GOOGLE_MAPS")
+        sys.exit(1)
+
+    CHAVE_GOOGLE_MAPS = sys.argv[1]
+    bootstrap(CHAVE_GOOGLE_MAPS)
